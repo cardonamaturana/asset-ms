@@ -1,4 +1,4 @@
-package com.cardonamaturana.assetservicems.domain.entity;
+package com.cardonamaturana.assetms.domain.entity;
 
 
 import lombok.AllArgsConstructor;
