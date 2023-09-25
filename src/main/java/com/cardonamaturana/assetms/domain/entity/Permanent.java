@@ -1,11 +1,12 @@
 package com.cardonamaturana.assetms.domain.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class Permanent extends Furniture {
 
+  public Permanent() {
+
+  }
 }

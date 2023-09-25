@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: asset-ms
+  #TODO: ENVIRONMENT VARIABLES
+  data:
+    mongodb:
+      auto-index-creation : true
+      uri: mongodb://admin:root123@localhost:27018/asset-develop?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/index.html
+  api:
+    docs:
+      path: /swagger-doc/v3/api-docs
+      groups:
+        enable: true
