@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class Fijo extends Mueble {
+public class Permanent extends Furniture {
 
 }

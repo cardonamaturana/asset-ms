@@ -10,6 +10,6 @@ public class Computer extends Technological {
 
   private String processor;
   private String ramQuantity;
-  private String storageQuantiy;
+  private String storageQuantity;
 
 }

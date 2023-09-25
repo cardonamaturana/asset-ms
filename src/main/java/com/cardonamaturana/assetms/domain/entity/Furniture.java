@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class Mueble extends Asset {
+public class Furniture extends Asset {
 
 
   private String manufacturer;
