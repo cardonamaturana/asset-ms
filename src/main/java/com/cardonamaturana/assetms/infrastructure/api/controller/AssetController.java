@@ -4,6 +4,8 @@ import com.cardonamaturana.assetms.application.asset.AssetGetAllApplication;
 import com.cardonamaturana.assetms.application.asset.AssetGetByIdApplication;
 import com.cardonamaturana.assetms.infrastructure.api.dto.response.AssetResponse;
 import com.cardonamaturana.assetms.infrastructure.api.mapper.asset.AssetResponseMapper;
+import com.cardonamaturana.assetms.infrastructure.client.MiServicio;
+import com.cardonamaturana.assetms.infrastructure.client.mapper.AssigneeResponseMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,8 @@ public class AssetController {
   private final AssetGetAllApplication assetGetAllApplication;
   private final AssetGetByIdApplication assetGetByIdApplication;
   private final AssetResponseMapper assetResponseMapper;
+  private final MiServicio assigneeClient;
+  private final AssigneeResponseMapper assigneeResponseMapper;
 
 
   @GetMapping()
@@ -33,7 +37,16 @@ public class AssetController {
       @ApiResponse(responseCode = "500", description = "error in response")})
   @ResponseStatus(HttpStatus.OK)
   public Flux<AssetResponse> getAllAsset() {
-    return assetGetAllApplication.getAll().map(assetResponseMapper::toDto);
+    return assetGetAllApplication.getAll().map(assetResponseMapper::toDto)
+        .flatMap(assetResponse ->
+            assigneeClient.obtenerAssigneePorId(assetResponse.getAssigneeResponse().getId())
+                //TODO: CAMBIAR EL NOMBRE DEL METODO EN ESPAÑOL
+                .map(assigneeResponseMapper::toDto)
+                .map(assigneeResponse -> {
+                  assetResponse.setAssigneeResponse(assigneeResponse);
+                  return assetResponse;
+                })
+        );
   }
 
   @GetMapping("/id")

@@ -3,7 +3,7 @@ package com.cardonamaturana.assetms.infrastructure.client.response;
 import lombok.Data;
 
 @Data
-public abstract class AssigneeResponse {
+public class AssigneeResponse {
 
   protected String id;
 
