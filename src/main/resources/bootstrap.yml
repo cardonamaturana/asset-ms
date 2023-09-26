@@ -9,6 +9,13 @@ spring:
       auto-index-creation : true
       uri: mongodb://admin:root123@localhost:27018/asset-develop?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
 
+feign-clients:
+  assignee:
+    url: http://${ASSIGNEE_MANAGER_HOST}:${ASSIGNEE_MANAGER_PORT}/assignee
+  server:
+    error:
+      include-stacktrace: never
+
 springdoc:
   swagger-ui:
     path: /swagger-ui/index.html
