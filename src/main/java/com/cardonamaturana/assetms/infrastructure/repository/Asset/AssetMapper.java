@@ -45,36 +45,36 @@ public class AssetMapper {
   public AssetDto toDto(Asset asset) {
     AssetDto assetDto;
 
-    if (asset instanceof AbstractAsset) {
-      assetDto = abstractAssetMapper.toDto((AbstractAsset) asset);
-      assetDto.setId(asset.getId());
-      return assetDto;
-    } else if (asset instanceof Furniture) {
-      assetDto = furnitureMapper.toDto((Furniture) asset);
-      assetDto.setId(asset.getId());
-      return assetDto;
-    } else if (asset instanceof Technological) {
-      assetDto = technologicalMapper.toDto((Technological) asset);
-      assetDto.setId(asset.getId());
-      return assetDto;
-    } else if (asset instanceof Permanent) {
-      assetDto = permanentMapper.toDto((Permanent) asset);
-      assetDto.setId(asset.getId());
-      return assetDto;
-    } else if (asset instanceof Maintenance) {
-      assetDto = maintenanceMapper.toDto((Maintenance) asset);
-      assetDto.setId(asset.getId());
-      return assetDto;
-    } else if (asset instanceof Licence) {
-      assetDto = licenceMapper.toDto((Licence) asset);
+    if (asset instanceof Monitor) {
+      assetDto = monitorMapper.toDto((Monitor) asset);
       assetDto.setId(asset.getId());
       return assetDto;
     } else if (asset instanceof Computer) {
       assetDto = computerMapper.toDto((Computer) asset);
       assetDto.setId(asset.getId());
       return assetDto;
-    } else if (asset instanceof Monitor) {
-      assetDto = monitorMapper.toDto((Monitor) asset);
+    } else if (asset instanceof Licence) {
+      assetDto = licenceMapper.toDto((Licence) asset);
+      assetDto.setId(asset.getId());
+      return assetDto;
+    } else if (asset instanceof Maintenance) {
+      assetDto = maintenanceMapper.toDto((Maintenance) asset);
+      assetDto.setId(asset.getId());
+      return assetDto;
+    } else if (asset instanceof Permanent) {
+      assetDto = permanentMapper.toDto((Permanent) asset);
+      assetDto.setId(asset.getId());
+      return assetDto;
+    } else if (asset instanceof Technological) {
+      assetDto = technologicalMapper.toDto((Technological) asset);
+      assetDto.setId(asset.getId());
+      return assetDto;
+    } else if (asset instanceof Furniture) {
+      assetDto = furnitureMapper.toDto((Furniture) asset);
+      assetDto.setId(asset.getId());
+      return assetDto;
+    } else if (asset instanceof AbstractAsset) {
+      assetDto = abstractAssetMapper.toDto((AbstractAsset) asset);
       assetDto.setId(asset.getId());
       return assetDto;
     }
@@ -85,36 +85,36 @@ public class AssetMapper {
   public Asset toEntity(AssetDto assetDto) {
     Asset asset;
 
-    if (assetDto instanceof AbstractAssetDto) {
-      asset = abstractAssetMapper.toEntity((AbstractAssetDto) assetDto);
-      asset.setId(asset.getId());
-      return asset;
-    } else if (assetDto instanceof FurnitureDto) {
-      asset = furnitureMapper.toEntity((FurnitureDto) assetDto);
-      asset.setId(asset.getId());
-      return asset;
-    } else if (assetDto instanceof TechnologicalDto) {
-      asset = technologicalMapper.toEntity((TechnologicalDto) assetDto);
-      asset.setId(asset.getId());
-      return asset;
-    } else if (assetDto instanceof PermanentDto) {
-      asset = permanentMapper.toEntity((PermanentDto) assetDto);
-      asset.setId(asset.getId());
-      return asset;
-    } else if (assetDto instanceof MaintenanceDto) {
-      asset = maintenanceMapper.toEntity((MaintenanceDto) assetDto);
-      asset.setId(asset.getId());
-      return asset;
-    } else if (assetDto instanceof LicenceDto) {
-      asset = licenceMapper.toEntity((LicenceDto) assetDto);
+    if (assetDto instanceof MonitorDto) {
+      asset = monitorMapper.toEntity((MonitorDto) assetDto);
       asset.setId(asset.getId());
       return asset;
     } else if (assetDto instanceof ComputerDto) {
       asset = computerMapper.toEntity((ComputerDto) assetDto);
       asset.setId(asset.getId());
       return asset;
-    } else if (assetDto instanceof MonitorDto) {
-      asset = monitorMapper.toEntity((MonitorDto) assetDto);
+    } else if (assetDto instanceof LicenceDto) {
+      asset = licenceMapper.toEntity((LicenceDto) assetDto);
+      asset.setId(asset.getId());
+      return asset;
+    } else if (assetDto instanceof MaintenanceDto) {
+      asset = maintenanceMapper.toEntity((MaintenanceDto) assetDto);
+      asset.setId(asset.getId());
+      return asset;
+    } else if (assetDto instanceof PermanentDto) {
+      asset = permanentMapper.toEntity((PermanentDto) assetDto);
+      asset.setId(asset.getId());
+      return asset;
+    } else if (assetDto instanceof TechnologicalDto) {
+      asset = technologicalMapper.toEntity((TechnologicalDto) assetDto);
+      asset.setId(asset.getId());
+      return asset;
+    } else if (assetDto instanceof FurnitureDto) {
+      asset = furnitureMapper.toEntity((FurnitureDto) assetDto);
+      asset.setId(asset.getId());
+      return asset;
+    } else if (assetDto instanceof AbstractAssetDto) {
+      asset = abstractAssetMapper.toEntity((AbstractAssetDto) assetDto);
       asset.setId(asset.getId());
       return asset;
     }

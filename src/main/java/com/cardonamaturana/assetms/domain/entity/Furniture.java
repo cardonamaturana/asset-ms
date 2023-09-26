@@ -3,8 +3,10 @@ package com.cardonamaturana.assetms.domain.entity;
 
 import java.time.LocalDate;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString(callSuper = true)
 public class Furniture extends Asset {
 
 

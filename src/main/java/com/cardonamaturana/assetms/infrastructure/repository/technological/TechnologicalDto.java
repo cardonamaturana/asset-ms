@@ -3,9 +3,11 @@ package com.cardonamaturana.assetms.infrastructure.repository.technological;
 import com.cardonamaturana.assetms.domain.entity.Status;
 import com.cardonamaturana.assetms.infrastructure.repository.Asset.AssetDto;
 import java.time.LocalDate;
+import lombok.Data;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @Document("assets")
 @TypeAlias("TechnologicalDto")
 public class TechnologicalDto extends AssetDto {

@@ -37,36 +37,36 @@ public class AssetResponseMapper {
   public AssetResponse toDto(Asset asset) {
     AssetResponse assetResponse;
 
-    if (asset instanceof AbstractAsset) {
-      assetResponse = abstractAssetResponseMapper.toDto((AbstractAsset) asset);
-      assetResponse.setId(asset.getId());
-      return assetResponse;
-    } else if (asset instanceof Furniture) {
-      assetResponse = furnitureResponseMapper.toDto((Furniture) asset);
-      assetResponse.setId(asset.getId());
-      return assetResponse;
-    } else if (asset instanceof Technological) {
-      assetResponse = technologicalResponseMapper.toDto((Technological) asset);
-      assetResponse.setId(asset.getId());
-      return assetResponse;
-    } else if (asset instanceof Permanent) {
-      assetResponse = permanentResponseMapper.toDto((Permanent) asset);
-      assetResponse.setId(asset.getId());
-      return assetResponse;
-    } else if (asset instanceof Maintenance) {
-      assetResponse = maintenanceResponseMapper.toDto((Maintenance) asset);
-      assetResponse.setId(asset.getId());
-      return assetResponse;
-    } else if (asset instanceof Licence) {
-      assetResponse = licenceResponseMapper.toDto((Licence) asset);
+    if (asset instanceof Monitor) {
+      assetResponse = monitorResponseMapper.toDto((Monitor) asset);
       assetResponse.setId(asset.getId());
       return assetResponse;
     } else if (asset instanceof Computer) {
       assetResponse = computerResponseMapper.toDto((Computer) asset);
       assetResponse.setId(asset.getId());
       return assetResponse;
-    } else if (asset instanceof Monitor) {
-      assetResponse = monitorResponseMapper.toDto((Monitor) asset);
+    } else if (asset instanceof Licence) {
+      assetResponse = licenceResponseMapper.toDto((Licence) asset);
+      assetResponse.setId(asset.getId());
+      return assetResponse;
+    } else if (asset instanceof Maintenance) {
+      assetResponse = maintenanceResponseMapper.toDto((Maintenance) asset);
+      assetResponse.setId(asset.getId());
+      return assetResponse;
+    } else if (asset instanceof Permanent) {
+      assetResponse = permanentResponseMapper.toDto((Permanent) asset);
+      assetResponse.setId(asset.getId());
+      return assetResponse;
+    } else if (asset instanceof Technological) {
+      assetResponse = technologicalResponseMapper.toDto((Technological) asset);
+      assetResponse.setId(asset.getId());
+      return assetResponse;
+    } else if (asset instanceof Furniture) {
+      assetResponse = furnitureResponseMapper.toDto((Furniture) asset);
+      assetResponse.setId(asset.getId());
+      return assetResponse;
+    } else if (asset instanceof AbstractAsset) {
+      assetResponse = abstractAssetResponseMapper.toDto((AbstractAsset) asset);
       assetResponse.setId(asset.getId());
       return assetResponse;
     }

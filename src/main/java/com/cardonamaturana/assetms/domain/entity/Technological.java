@@ -3,9 +3,11 @@ package com.cardonamaturana.assetms.domain.entity;
 
 import java.time.LocalDate;
 import lombok.Data;
+import lombok.ToString;
 
 
 @Data
+@ToString(callSuper = true)
 public class Technological extends Asset {
 
   private String brand;

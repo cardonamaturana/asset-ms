@@ -3,9 +3,11 @@ package com.cardonamaturana.assetms.infrastructure.repository.licence;
 import com.cardonamaturana.assetms.domain.entity.Status;
 import com.cardonamaturana.assetms.infrastructure.repository.abstractasset.AbstractAssetDto;
 import java.time.LocalDate;
+import lombok.Data;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @Document("assets")
 @TypeAlias("LicenceDto")
 public class LicenceDto extends AbstractAssetDto {
