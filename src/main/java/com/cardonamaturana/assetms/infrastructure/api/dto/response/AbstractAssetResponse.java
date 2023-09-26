@@ -1,19 +1,16 @@
 package com.cardonamaturana.assetms.infrastructure.api.dto.response;
 
 
-import com.cardonamaturana.assetms.domain.entity.AbstractAsset;
 import com.cardonamaturana.assetms.domain.entity.Status;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class AbstractAssetResponse extends AssetResponse {
 
   private String vendorUrl;
 
-  public AbstractAssetResponse(){
+  public AbstractAssetResponse() {
 
   }
 

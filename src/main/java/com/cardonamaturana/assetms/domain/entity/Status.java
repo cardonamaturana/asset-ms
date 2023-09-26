@@ -14,6 +14,5 @@ public class Status {
 
   private String description;
 
-  ;
 
 }

@@ -24,7 +24,6 @@ public class TechnologicalController {
 
   private final AssetSaveApplication assetSaveApplication;
   private final ComputerRequestMapper computerRequestMapper;
-  private final ComputerResponseMapper computerResponseMapper;
   private final AssetResponseMapper assetResponseMapper;
 
 
