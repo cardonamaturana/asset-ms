@@ -28,7 +28,8 @@ public class AssigneeResponseMapper {
   public AssigneeResponse toDto(String classNameType, Map<?, ?> assignee) {
     AssigneeResponse assignResponse;
     if (classNameType == null) {
-      return null;
+
+      return new AssigneeResponse();
     }
 
     if (classNameType.equals(CONTRIBUTOR.getMessage())) {
