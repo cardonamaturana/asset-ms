@@ -4,8 +4,9 @@ import com.cardonamaturana.assetms.application.asset.AssetGetAllApplication;
 import com.cardonamaturana.assetms.application.asset.AssetGetByIdApplication;
 import com.cardonamaturana.assetms.infrastructure.api.dto.response.AssetResponse;
 import com.cardonamaturana.assetms.infrastructure.api.mapper.asset.AssetResponseMapper;
-import com.cardonamaturana.assetms.infrastructure.client.MiServicio;
+import com.cardonamaturana.assetms.infrastructure.client.MyClientService;
 import com.cardonamaturana.assetms.infrastructure.client.mapper.AssigneeResponseMapper;
+import com.cardonamaturana.assetms.infrastructure.client.response.AssigneeResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,8 @@ public class AssetController {
   private final AssetGetAllApplication assetGetAllApplication;
   private final AssetGetByIdApplication assetGetByIdApplication;
   private final AssetResponseMapper assetResponseMapper;
-  private final MiServicio assigneeClient;
+  private final MyClientService myClientService;
   private final AssigneeResponseMapper assigneeResponseMapper;
-
 
   @GetMapping()
   @Operation(summary = "Get all assets", description = "Obtain all register for asset", responses = {
@@ -39,9 +39,9 @@ public class AssetController {
   public Flux<AssetResponse> getAllAsset() {
     return assetGetAllApplication.getAll().map(assetResponseMapper::toDto)
         .flatMap(assetResponse ->
-            assigneeClient.obtenerAssigneePorId(assetResponse.getAssigneeResponse().getId())
+            myClientService.obtenerAssigneePorId(assetResponse.getAssigneeResponse().getId())
+                .defaultIfEmpty(new AssigneeResponse())
                 //TODO: CAMBIAR EL NOMBRE DEL METODO EN ESPAÑOL
-                .map(assigneeResponseMapper::toDto)
                 .map(assigneeResponse -> {
                   assetResponse.setAssigneeResponse(assigneeResponse);
                   return assetResponse;

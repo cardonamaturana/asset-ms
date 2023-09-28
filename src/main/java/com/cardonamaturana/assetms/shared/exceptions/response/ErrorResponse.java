@@ -1,4 +1,4 @@
-package com.cardonamaturana.assetms.exceptions.response;
+package com.cardonamaturana.assetms.shared.exceptions.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

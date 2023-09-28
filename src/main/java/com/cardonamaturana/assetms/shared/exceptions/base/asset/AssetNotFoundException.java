@@ -1,8 +1,8 @@
-package com.cardonamaturana.assetms.exceptions.base.asset;
+package com.cardonamaturana.assetms.shared.exceptions.base.asset;
 
 
-import com.cardonamaturana.assetms.exceptions.base.BaseException;
-import com.cardonamaturana.assetms.exceptions.base.ExceptionCode;
+import com.cardonamaturana.assetms.shared.exceptions.base.BaseException;
+import com.cardonamaturana.assetms.shared.exceptions.base.ExceptionCode;
 import org.springframework.http.HttpStatus;
 
 public class AssetNotFoundException extends BaseException {

@@ -1,4 +1,4 @@
-package com.cardonamaturana.assetms.exceptions.base;
+package com.cardonamaturana.assetms.shared.exceptions.base;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

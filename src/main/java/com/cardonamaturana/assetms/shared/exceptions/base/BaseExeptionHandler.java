@@ -1,7 +1,7 @@
-package com.cardonamaturana.assetms.exceptions.base;
+package com.cardonamaturana.assetms.shared.exceptions.base;
 
 
-import com.cardonamaturana.assetms.exceptions.response.ErrorResponse;
+import com.cardonamaturana.assetms.shared.exceptions.response.ErrorResponse;
 import com.mongodb.MongoWriteException;
 import java.sql.Timestamp;
 import java.util.stream.Collectors;

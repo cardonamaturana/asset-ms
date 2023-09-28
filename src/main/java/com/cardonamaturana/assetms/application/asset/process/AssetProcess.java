@@ -4,7 +4,7 @@ package com.cardonamaturana.assetms.application.asset.process;
 import com.cardonamaturana.assetms.domain.entity.Asset;
 import com.cardonamaturana.assetms.domain.service.asset.AssetGetByIdService;
 import com.cardonamaturana.assetms.domain.service.status.StatusGetByIdService;
-import com.cardonamaturana.assetms.exceptions.base.asset.StatusNotFoundException;
+import com.cardonamaturana.assetms.shared.exceptions.base.asset.StatusNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
