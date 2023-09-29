@@ -7,11 +7,16 @@ import com.cardonamaturana.assetms.infrastructure.api.mapper.asset.AssetResponse
 import com.cardonamaturana.assetms.infrastructure.client.MyClientService;
 import com.cardonamaturana.assetms.infrastructure.client.mapper.AssigneeResponseMapper;
 import com.cardonamaturana.assetms.infrastructure.client.response.AssigneeResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import java.sql.Time;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -36,20 +41,27 @@ public class AssetController {
       @ApiResponse(responseCode = "200", description = "obtained successfully"),
       @ApiResponse(responseCode = "500", description = "error in response")})
   @ResponseStatus(HttpStatus.OK)
-  public Flux<AssetResponse> getAllAsset() {
+  public Flux<AssetResponse> getAllAsset() throws JsonProcessingException, InterruptedException {
     return assetGetAllApplication.getAll().map(assetResponseMapper::toDto)
         .flatMap(assetResponse ->
-            myClientService.obtenerAssigneePorId(assetResponse.getAssigneeResponse().getId())
-                .defaultIfEmpty(new AssigneeResponse())
-                //TODO: CAMBIAR EL NOMBRE DEL METODO EN ESPAÑOL
-                .map(assigneeResponse -> {
-                  assetResponse.setAssigneeResponse(assigneeResponse);
-                  return assetResponse;
-                })
+            {
+              try {
+                return myClientService.getAssigneeById(assetResponse.getAssigneeResponse().getId())
+                    .defaultIfEmpty(new AssigneeResponse())
+                    //TODO: CAMBIAR EL NOMBRE DEL METODO EN ESPAÑOL
+                    .map(assigneeResponse -> {
+                      assetResponse.setAssigneeResponse(assigneeResponse);
+                      return assetResponse;
+                    });
+              } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+              }
+            }
         );
   }
 
-  @GetMapping("/id")
+  @GetMapping("/{assetId}")
+  @Cacheable(value = "AssigneeCache", key = "#assetId")
   @Operation(summary = "Get asset for id ", description = "Obtain one register of asset for id", responses = {
       @ApiResponse(responseCode = "200", description = "obtained successfully"),
       @ApiResponse(responseCode = "500", description = "error in response")})

@@ -24,3 +24,10 @@ springdoc:
       path: /swagger-doc/v3/api-docs
       groups:
         enable: true
+
+  redis:
+    host: localhost
+    port: 6379
+    cache:
+      type: redis
+      cache-names : AssigneeCache
