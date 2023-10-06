@@ -2,16 +2,17 @@ package com.cardonamaturana.assetms.domain.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Status {
 
-  private int id;
+  private String id;
 
-  private enum description {}
+  private String description;
 
-  ;
 
 }
