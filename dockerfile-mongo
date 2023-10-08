@@ -1,0 +1,14 @@
+# Utiliza una imagen base más ligera de Alpine Linux
+FROM alpine:latest
+
+# Instala MongoDB
+RUN apk add --no-cache mongodb
+
+# Directorio de trabajo
+WORKDIR /data/asset-ms-db
+
+# Puerto que MongoDB escuchará
+EXPOSE 27017
+
+# Comando para iniciar MongoDB cuando se ejecute el contenedor
+CMD ["mongod"]

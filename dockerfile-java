@@ -1,0 +1,14 @@
+# Utiliza la imagen oficial de Eclipse Temurin OpenJDK 17 como base
+FROM eclipse-temurin:17-jdk
+
+# Define el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo JAR de tu aplicación (reemplaza "nombre_del_archivo.jar" por el nombre de tu archivo JAR)
+COPY target/asset-ms-1.0.jar app.jar
+
+# Expone el puerto en el que tu aplicación escucha (ajusta el número de puerto según tus necesidades)
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación cuando el contenedor se inicia
+CMD ["java", "-jar", "app.jar"]
