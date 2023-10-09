@@ -13,6 +13,7 @@ public class AbstractAsset extends Asset {
 
   private String vendorUrl;
 
+
   public AbstractAsset(){
 
   }
