@@ -1,5 +1,0 @@
-# Use an official MongoDB image as the base image
-FROM mongo:latest
-
-# Expose the default MongoDB port (27017)
-EXPOSE 27017
