@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  mi-aplicacion-java:
+  asset-ms:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,3 +9,17 @@ services:
       - "8080:8080"
     volumes:
       - ./target:/app/target
+    networks:
+      - backend-asset
+  mongo-asset:
+    image: mongo
+    ## no se mapea los puertos ya que la bd unicamente sera accesible desde el ms
+    volumes:
+      - /mongo-data-asset-ms:/data/db
+    networks:
+      - backend-asset
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${ASSET_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${ASSET_MONGO_INITDB_ROOT_PASSWORD}
+networks:
+  backend-asset:
