@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-    label 'docker-dind'
-    }
+    agent any
 
     environment {
         DOCKER_IMAGE = "juliocardona/asset-ms:${env.GIT_COMMIT}"
