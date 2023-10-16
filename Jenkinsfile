@@ -1,4 +1,5 @@
-def DOCKER_IMAGE = "juliocardona/asset-ms:1.0.0.0"
+def NEW_DOCKER_IMAGE = "${DOCKER_IMAGE_BASE}:${commitId}"
+
 pipeline {
     agent any
 
