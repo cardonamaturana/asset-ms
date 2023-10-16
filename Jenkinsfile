@@ -1,8 +1,8 @@
+def DOCKER_IMAGE = "juliocardona/asset-ms:1.0.0.0"
 pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE_BASE = "juliocardona/asset-ms"  // nombre base de la imagen
         DOCKERHUB_TOKEN = vault path: 'secret/docker-hub', key: 'DOCKERHUB_JULIOCARDONA_TOKEN', vaultUrl: 'http://localhost:8200'
     }
     stages {
@@ -46,7 +46,7 @@ pipeline {
     post {
         always {
             // Limpia el entorno al final
-            sh "docker rmi -f $DOCKER_IMAGE || true"
+            sh "docker rmi -f ${DOCKER_IMAGE} || true"
         }
     }
 }
