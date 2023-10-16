@@ -5,7 +5,6 @@ pipeline {
         DOCKER_IMAGE = "juliocardona/asset-ms:${env.GIT_COMMIT}"
         DOCKERHUB_TOKEN = vault path: 'secret/docker-hub', key: 'DOCKERHUB_JULIOCARDONA_TOKEN', vaultUrl: 'http://vault-compose:8200'
     }
-
     stages {
         stage('Clean') {
             steps {
