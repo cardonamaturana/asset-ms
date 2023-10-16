@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "juliocardona/asset-ms:${env.GIT_COMMIT}"
-        DOCKERHUB_TOKEN = vault path: 'secret/docker-hub', key: 'DOCKERHUB_JULIOCARDONA_TOKEN', vaultUrl: 'http://vault-compose:8200'
+        DOCKER_IMAGE = "juliocardona/asset-ms:1.0.0.0"
+        DOCKERHUB_TOKEN = vault path: 'secret/docker-hub', key: 'DOCKERHUB_JULIOCARDONA_TOKEN', vaultUrl: 'http://localhost:8200'
     }
     stages {
         stage('Clean') {
