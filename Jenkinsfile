@@ -1,31 +1,35 @@
-def NEW_DOCKER_IMAGE = "${DOCKER_IMAGE_BASE}:${commitId}"
-
 pipeline {
     agent any
 
     environment {
-        DOCKERHUB_TOKEN = vault path: 'secret/docker-hub', key: 'DOCKERHUB_JULIOCARDONA_TOKEN', vaultUrl: 'http://localhost:8200'
+        DOCKER_IMAGE_BASE = "juliocardona/asset-ms"
+        // No pongas la versión del DOCKER_IMAGE aquí, la definiremos en los pasos
     }
     stages {
         stage('Clean') {
             steps {
-                sh 'mvn clean'
+                script {
+                    // Asumiendo que estás usando Maven
+                    sh 'mvn clean'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    // Ejecuta tus pruebas. Ejemplo para Maven:
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Agrega una etiqueta basada en el ID del commit a la imagen
-                    def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    def commitId = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                     def DOCKER_IMAGE = "${DOCKER_IMAGE_BASE}:${commitId}"
-
+                    // Construye tu imagen de Docker
                     sh "docker build -t $DOCKER_IMAGE ."
                 }
             }
@@ -34,11 +38,18 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    // Inicia sesión en DockerHub usando el token
-                    withCredentials([string(credentialsId: 'DOCKERHUB_TOKEN', variable: 'TOKEN')]) {
-                        sh "docker login -u $DOCKERHUB_USER -p $TOKEN"
-                        sh "docker push $DOCKER_IMAGE"
+                    // Adquirir el token de Vault
+                    def DOCKERHUB_TOKEN = vault path: 'secret/docker-hub', key: 'DOCKERHUB_JULIOCARDONA_TOKEN', vaultUrl: 'http://localhost:8200'
+
+                    // Inicia sesión en DockerHub
+                    withCredentials([string(credentialsId: 'DOCKERHUB_CREDENTIALS', variable: 'DOCKERHUB_PASS')]) {
+                        sh "docker login -u juliocardona -p $DOCKERHUB_PASS"
                     }
+
+                    def commitId = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    def DOCKER_IMAGE = "${DOCKER_IMAGE_BASE}:${commitId}"
+                    // Envía tu imagen a DockerHub
+                    sh "docker push $DOCKER_IMAGE"
                 }
             }
         }
@@ -46,8 +57,10 @@ pipeline {
 
     post {
         always {
-            // Limpia el entorno al final
-            sh "docker rmi -f ${DOCKER_IMAGE} || true"
+            // Limpia el entorno al final, independientemente de si la ejecución fue exitosa o no
+            def commitId = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+            def DOCKER_IMAGE = "${DOCKER_IMAGE_BASE}:${commitId}"
+            sh "docker rmi -f $DOCKER_IMAGE || true"
         }
     }
 }
