@@ -52,6 +52,7 @@ public class MyClientService {
                   result.getBody());
               try {
                 if (Objects.nonNull(eventResult)) {
+                  // guardar el redis la respuesta del microservicio para futuras consultas.
                   valueOps.set(assigneeId, objectMapper.writeValueAsString(eventResult), Duration.ofMillis(10000));
                   return assigneeResponseMapper.toDto(eventResult);
                 }
