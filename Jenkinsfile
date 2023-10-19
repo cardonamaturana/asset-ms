@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+            DOCKERHUB_TOKEN    = vault path: 'secret/dockerhub', key: 'JULIOCARDONA_TOKEN', vaultUrl: 'http://vault-compose:8200'
+        }
+
     stages {
         stage('Clean') {
             steps {
@@ -24,6 +28,14 @@ pipeline {
             steps {
                 script {
                     bat 'docker --version'
+                    echo 'Construyendo docker image ...
+                    echo '.............................'
+                    echo '.............................'
+                    echo '......DOCKERFILE BUILD.......'
+                    echo '.............................'
+                    echo '.............................'
+                    bat 'docker build .'
+
                     bat 'docker-compose --version'
                 }
             }
