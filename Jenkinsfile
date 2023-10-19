@@ -29,7 +29,7 @@ pipeline {
                 script {
                     bat 'docker --version'
 
-                    echo 'Construyendo docker image ...
+                    echo 'Construyendo docker image ...'
                     echo '.............................'
                     echo '.............................'
                     echo '......DOCKERFILE BUILD.......'
