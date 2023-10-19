@@ -28,6 +28,7 @@ pipeline {
             steps {
                 script {
                     bat 'docker --version'
+
                     echo 'Construyendo docker image ...
                     echo '.............................'
                     echo '.............................'
