@@ -35,7 +35,7 @@ pipeline {
                     echo '......DOCKERFILE BUILD.......'
                     echo '.............................'
                     echo '.............................'
-                    bat 'docker build .'
+                    bat 'docker build -f Dockerfile-java .'
 
                     bat 'docker-compose --version'
                 }
