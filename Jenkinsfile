@@ -14,7 +14,6 @@ pipeline {
             }
         }
 
-/*
         stage('Install') {
             steps {
                 script {
@@ -23,7 +22,6 @@ pipeline {
             }
         }
 
-*/
         stage('Show Docker & Docker Compose versions') {
             steps {
                 script {
