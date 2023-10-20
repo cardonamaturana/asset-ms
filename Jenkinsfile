@@ -35,7 +35,10 @@ pipeline {
                     echo '......DOCKERFILE BUILD.......'
                     echo '.............................'
                     echo '.............................'
-                    bat 'docker build -f Dockerfile-java .'
+                    # Obtener el hash del último commit
+                    bat 'commitHash=$(git rev-parse HEAD)'
+                    # Construir la imagen Docker usando el hash del commit como tag
+                    bat 'docker build -t asset-ms:$commitHash -f Dockerfile-java .'
 
                     bat 'docker-compose --version'
                 }
