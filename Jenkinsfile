@@ -5,6 +5,9 @@ pipeline {
             DOCKERHUB_TOKEN    = vault path: 'secret/dockerhub', key: 'JULIOCARDONA_TOKEN', vaultUrl: 'http://127.0.0.1:8200'
         }
 
+        // Definición de la variable en un alcance más amplio
+            def commitHash = ''
+
     stages {
         stage('Clean') {
             steps {
@@ -35,7 +38,7 @@ pipeline {
                     echo '.............................'
                     echo 'Obtener el hash del último commit'
                     def output = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    def commitHash = output.split('\n')[-1]
+                    commitHash = output.split('\n')[-1]
                     echo "Commit Hash: ${commitHash}"
                     echo 'Monstrando directorios...'
                     bat 'dir target'
@@ -48,5 +51,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Push to DockerHub') {
+                    steps {
+                        script {
+                            // Login en Docker Hub
+                            bat "echo ${DOCKERHUB_TOKEN} | docker login -u juliocardona --password-stdin"
+
+                            // Subir la imagen
+                            bat "docker push juliocardona/asset-ms:${commitHash}"
+
+                            // Opcional: Salir de Docker Hub al finalizar
+                            bat "docker logout"
+                        }
+                    }
+                }
+
+
     }
 }
