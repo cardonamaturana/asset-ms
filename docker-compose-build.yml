@@ -2,7 +2,9 @@ version: '3'
 
 services:
   asset-ms:
-    image: juliocardona/asset-ms
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
