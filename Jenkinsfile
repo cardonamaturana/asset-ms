@@ -37,7 +37,7 @@ pipeline {
                     echo 'Obtener el hash del último commit'
                     commitHash = bat 'git rev-parse HEAD'
                     env.COMMIT_HASH = commitHash
-                    echo "Commit Hash: ${commitHash}"
+                    echo "Commit Hash: ${COMMIT_HASH}"
                     echo 'Monstrando directorios...'
                     bat 'dir target'
                     echo 'Mostrando directorios nuevamente'
