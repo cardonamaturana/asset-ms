@@ -43,7 +43,8 @@ pipeline {
                     echo 'Mostrando directorios nuevamente'
                     bat 'dir'
                     echo 'Construir la imagen Docker usando el hash del commit como tag'
-                    bat "docker build -t asset-ms:${commitHash} -f Dockerfile-java ."
+                    bat "docker build -t juliocardona/asset-ms:${commitHash} -f Dockerfile-java ."
+
                     bat 'docker-compose --version'
 
                 }
@@ -56,14 +57,8 @@ pipeline {
                     // Salir de cualquier sesión previa de Docker Hub
                     bat "docker logout"
 
-                    // Crea un archivo temporal con el token
-                    bat "echo %DOCKERHUB_TOKEN% > temp_token.txt"
-
                     // Login en Docker Hub
-                    bat "docker login -u juliocardona --password-stdin < temp_token.txt"
-
-                    // Elimina el archivo temporal
-                    bat "del temp_token.txt"
+                    bat 'docker login -u juliocardona --password ${DOCKERHUB_TOKEN}'
 
                     // Subir la imagen
                     bat "docker push juliocardona/asset-ms:${env.COMMIT_HASH}"
