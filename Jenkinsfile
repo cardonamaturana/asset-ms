@@ -58,6 +58,7 @@ pipeline {
                     bat "docker logout"
 
                     // Login en Docker Hub
+                    bat 'echo ${DOCKERHUB_TOKEN} ----->>>>>'
                     bat 'docker login -u juliocardona --password ${DOCKERHUB_TOKEN}'
 
                     // Subir la imagen
