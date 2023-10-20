@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: asset-ms
     ports:
       - "8080:8080"
     volumes:
@@ -12,6 +13,7 @@ services:
     networks:
       - backend-asset
   mongo-asset:
+    container_name: mongo-asset
     image: mongo
     ## no se mapea los puertos ya que la bd unicamente sera accesible desde el ms
     volumes:
