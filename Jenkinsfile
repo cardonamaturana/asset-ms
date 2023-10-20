@@ -51,19 +51,25 @@ pipeline {
         }
 
         stage('Push to DockerHub') {
-                    steps {
-                        script {
-                            // Login en Docker Hub
-                            bat "echo ${DOCKERHUB_TOKEN} | docker login -u juliocardona --password-stdin"
+            steps {
+                script {
+                    // Salir de cualquier sesión previa de Docker Hub
+                    bat "docker logout"
 
-                            // Subir la imagen
-                            bat "docker push juliocardona/asset-ms:${env.COMMIT_HASH}"
-
-                            // Opcional: Salir de Docker Hub al finalizar
-                            bat "docker logout"
-                        }
+                    // Login en Docker Hub
+                    withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKERHUB_TOKEN')]) {
+                        bat "echo %DOCKERHUB_TOKEN% | docker login -u juliocardona --password-stdin"
                     }
+
+                    // Subir la imagen
+                    bat "docker push juliocardona/asset-ms:${env.COMMIT_HASH}"
+
+                    // Opcional: Salir de Docker Hub al finalizar
+                    bat "docker logout"
                 }
+            }
+        }
+
 
 
     }
