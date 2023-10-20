@@ -39,12 +39,12 @@ pipeline {
                     def output = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     def commitHash = output.split('\n')[-1]
                     echo "Commit Hash: ${commitHash}"
-                    echo 'Construir la imagen Docker usando el hash del commit como tag'
-                    bat "docker build -t asset-ms:${commitHash} -f Dockerfile-java ."
                     echo 'Monstrando directorios...'
                     bat 'dir target'
                     echo 'Mostrando directorios nuevamente'
                     bat 'dir'
+                    echo 'Construir la imagen Docker usando el hash del commit como tag'
+                    bat "docker build -t asset-ms:${commitHash} -f Dockerfile-java ."
                     bat 'docker-compose --version'
 
                 }
