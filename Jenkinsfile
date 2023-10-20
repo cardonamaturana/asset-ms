@@ -58,10 +58,7 @@ pipeline {
                     bat "docker logout"
 
                     // Login en Docker Hub
-                    bat 'echo ${DOCKERHUB_TOKEN} credenciales1'
-                    bat 'echo %DOCKERHUB_TOKEN% credenciales2'
-                    bat 'echo $DOCKERHUB_TOKEN credenciales3'
-                    bat 'docker login -u juliocardona --password ${DOCKERHUB_TOKEN}'
+                    bat 'docker login -u juliocardona --password %DOCKERHUB_TOKEN%'
 
                     // Subir la imagen
                     bat "docker push juliocardona/asset-ms:${env.COMMIT_HASH}"
