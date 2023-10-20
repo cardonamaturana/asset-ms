@@ -14,7 +14,6 @@ pipeline {
             }
         }
 
-/*
         stage('Install') {
             steps {
                 script {
@@ -23,8 +22,7 @@ pipeline {
             }
         }
 
-*/
-        stage('Show Docker & Docker Compose versions') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     bat 'docker --version'
@@ -35,14 +33,40 @@ pipeline {
                     echo '......DOCKERFILE BUILD.......'
                     echo '.............................'
                     echo '.............................'
-                    # Obtener el hash del último commit
-                    bat 'commitHash=$(git rev-parse HEAD)'
-                    # Construir la imagen Docker usando el hash del commit como tag
-                    bat 'docker build -t asset-ms:$commitHash -f Dockerfile-java .'
+                    echo 'Obtener el hash del último commit'
+                    def output = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    commitHash = output.split('\n')[-1]
+                    env.COMMIT_HASH = commitHash
+                    echo "Commit Hash: ${commitHash}"
+                    echo 'Construir la imagen Docker usando el hash del commit como tag'
+                    bat "docker build -t juliocardona/asset-ms:${commitHash} -f Dockerfile-java ."
 
                     bat 'docker-compose --version'
+
                 }
             }
         }
+
+        stage('Push to DockerHub') {
+            steps {
+                script {
+                    // Salir de cualquier sesión previa de Docker Hub
+                    bat "docker logout"
+
+                    // Login en Docker Hub
+                    bat 'docker login -u juliocardona --password %DOCKERHUB_TOKEN%'
+
+                    // Subir la imagen
+                    bat "docker push juliocardona/asset-ms:${env.COMMIT_HASH}"
+
+                    // Opcional: Salir de Docker Hub al finalizar
+                    bat "docker logout"
+                }
+            }
+        }
+
+
+
+
     }
 }
