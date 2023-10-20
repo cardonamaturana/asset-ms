@@ -41,6 +41,10 @@ pipeline {
                     echo "Commit Hash: ${commitHash}"
                     echo 'Construir la imagen Docker usando el hash del commit como tag'
                     bat "docker build -t asset-ms:${commitHash} -f Dockerfile-java ."
+                    echo 'Monstrando directorios...'
+                    bat 'dir target'
+                    echo 'Mostrando directorios nuevamente'
+                    bat 'dir'
                     bat 'docker-compose --version'
 
                 }
