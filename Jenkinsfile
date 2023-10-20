@@ -36,9 +36,10 @@ pipeline {
                     echo '.............................'
                     echo '.............................'
                     echo 'Obtener el hash del último commit'
-                    bat 'commitHash=$(git rev-parse HEAD)'
+                    def commitHash = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    echo "Commit Hash: ${commitHash}"
                     echo 'Construir la imagen Docker usando el hash del commit como tag'
-                    bat 'docker build -t asset-ms:$commitHash -f Dockerfile-java .'
+                    bat "docker build -t asset-ms:${commitHash} -f Dockerfile-java ."
 
                     bat 'docker-compose --version'
                 }
