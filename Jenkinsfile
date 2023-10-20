@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Show Docker & Docker Compose versions') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     bat 'docker --version'
@@ -33,9 +33,9 @@ pipeline {
                     echo '......DOCKERFILE BUILD.......'
                     echo '.............................'
                     echo '.............................'
+
                     echo 'Obtener el hash del último commit'
-                    def output = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    commitHash = output.split('\n')[-1]
+                    commitHash = bat 'git rev-parse HEAD'
                     env.COMMIT_HASH = commitHash
                     echo "Commit Hash: ${commitHash}"
                     echo 'Monstrando directorios...'
