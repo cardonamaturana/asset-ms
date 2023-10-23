@@ -2,10 +2,14 @@ version: '3.7'
 
 services:
   asset-ms:
-    image: juliocardona/asset-ms
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: asset-ms
     ports:
       - "8080:8080"
+    volumes:
+      - ./target:/app/target
     networks:
       - backend-asset
   mongo-asset:
@@ -26,6 +30,7 @@ services:
       ASSET_MONGO_DB: ${ASSET_MONGO_DB}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+
 networks:
   backend-asset:
     name: backend-asset

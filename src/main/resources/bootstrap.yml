@@ -3,15 +3,14 @@ spring:
     active: dev
   application:
     name: asset-ms
-  #TODO: ENVIRONMENT VARIABLES
   data:
     mongodb:
       auto-index-creation : true
-      uri: mongodb://admin:root123@localhost:27018/asset-develop?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+      uri: mongodb://${ASSET_MONGO_USERNAME}:${ASSET_MONGO_PASSWORD}@${ASSET_MONGO_HOST}:${ASSET_MONGO_PORT}/${ASSET_MONGO_DB}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
 
 feign-clients:
   assignee:
-    url: http://${ASSIGNEE_MANAGER_HOST}:${ASSIGNEE_MANAGER_PORT}/assignee
+    url: http://${ASSIGNEE_HOST}:${ASSIGNEE_PORT}/assignee
   server:
     error:
       include-stacktrace: never
@@ -26,8 +25,8 @@ springdoc:
         enable: true
 
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
     cache:
       type: redis
       cache-names : AssigneeCache
