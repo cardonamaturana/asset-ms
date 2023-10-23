@@ -12,6 +12,14 @@ services:
       - ./target:/app/target
     networks:
       - backend-asset
+    environment:
+      ASSET_MONGO_USERNAME: ${ASSET_MONGO_USERNAME}
+      ASSET_MONGO_PASSWORD: ${ASSET_MONGO_PASSWORD}
+      ASSET_MONGO_HOST: ${ASSET_MONGO_HOST}
+      ASSET_MONGO_PORT: ${ASSET_MONGO_PORT}
+      ASSET_MONGO_DB: ${ASSET_MONGO_DB}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
   mongo-asset:
     container_name: mongo-asset
     image: mongo
@@ -23,14 +31,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${ASSET_MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${ASSET_MONGO_INITDB_ROOT_PASSWORD}
-      ASSET_MONGO_USERNAME: ${ASSET_MONGO_USERNAME}
-      ASSET_MONGO_PASSWORD: ${ASSET_MONGO_PASSWORD}
-      ASSET_MONGO_HOST: ${ASSET_MONGO_HOST}
-      ASSET_MONGO_PORT: ${ASSET_MONGO_PORT}
-      ASSET_MONGO_DB: ${ASSET_MONGO_DB}
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
-
 networks:
   backend-asset:
     name: backend-asset
