@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   asset-ms:
@@ -6,8 +6,6 @@ services:
     container_name: asset-ms
     ports:
       - "8080:8080"
-    volumes:
-      - ./target:/app/target
     networks:
       - backend-asset
   mongo-asset:
