@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     networks:
       - backend-asset
+    restart: always
     environment:
       ASSET_MONGO_USERNAME: ${ASSET_MONGO_USERNAME}
       ASSET_MONGO_PASSWORD: ${ASSET_MONGO_PASSWORD}
@@ -24,6 +25,7 @@ services:
       - /mongo-data-asset-ms:/data/db
     networks:
       - backend-asset
+    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${ASSET_MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${ASSET_MONGO_INITDB_ROOT_PASSWORD}
