@@ -39,7 +39,7 @@ pipeline {
                     env.COMMIT_HASH = commitHash
                     echo "Commit Hash: ${commitHash}"
                     echo 'Construir la imagen Docker usando el hash del commit como tag'
-                    bat "docker build -t juliocardona/asset-ms:${commitHash} -f Dockerfile-java ."
+                    bat "docker build -t juliocardona/asset-ms:${commitHash} -t juliocardona/asset-ms:latest -f Dockerfile-java ."
 
                     bat 'docker-compose --version'
 
@@ -58,6 +58,7 @@ pipeline {
 
                     // Subir la imagen
                     bat "docker push juliocardona/asset-ms:${env.COMMIT_HASH}"
+                    bat "docker push juliocardona/asset-ms:latest"
 
                     // Opcional: Salir de Docker Hub al finalizar
                     bat "docker logout"
