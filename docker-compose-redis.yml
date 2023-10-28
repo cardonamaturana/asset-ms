@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    container_name: mi-redis
+    volumes:
+      - redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      - backend-assignee
+      - backend-asset
+
+volumes:
+  redis-data:
+
+networks:
+  backend-assignee:
+    external: true
+    name: backend-assignee
+    driver: bridge
+  backend-asset:
+    external: true
+    name: backend-asset
+    driver: bridge
