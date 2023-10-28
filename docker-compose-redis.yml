@@ -3,7 +3,7 @@ version: '3.7'
 services:
   redis:
     image: redis
-    container_name: mi-redis
+    container_name: redis
     volumes:
       - redis-data:/data
     command: ["redis-server", "--appendonly", "yes"]
