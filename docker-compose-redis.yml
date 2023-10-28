@@ -11,7 +11,7 @@ services:
       - backend-assignee
       - backend-asset
     expose:
-      - ${REDIS_HOST}
+      - ${REDIS_PORT}
 
 volumes:
   redis-data:
