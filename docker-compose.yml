@@ -25,6 +25,8 @@ services:
       - /mongo-data-asset-ms:/data/db
     networks:
       - backend-asset
+    expose:
+      - 27018
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${ASSET_MONGO_INITDB_ROOT_USERNAME}
