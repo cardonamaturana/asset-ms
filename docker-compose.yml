@@ -26,7 +26,7 @@ services:
     networks:
       - backend-asset
     expose:
-      - 27018
+      - ${ASSET_MONGO_PORT}
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${ASSET_MONGO_INITDB_ROOT_USERNAME}
