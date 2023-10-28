@@ -10,6 +10,8 @@ services:
     networks:
       - backend-assignee
       - backend-asset
+    expose:
+      - ${REDIS_HOST}
 
 volumes:
   redis-data:
