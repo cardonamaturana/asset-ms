@@ -27,7 +27,7 @@ springdoc:
         enable: true
 
   redis:
-    host: ${REDIS_HOST}
+    host: redis
     port: ${REDIS_PORT}
     cache:
       type: redis
