@@ -1,3 +1,10 @@
+redis:
+  host: redis
+  port: ${REDIS_PORT}
+  cache:
+    type: redis
+    cache-names: AssigneeCache
+
 server:
   port: 8080
 spring:
@@ -26,12 +33,6 @@ springdoc:
       groups:
         enable: true
 
-  redis:
-    host: redis
-    port: ${REDIS_PORT}
-    cache:
-      type: redis
-      cache-names: AssigneeCache
 
 MS:
   ASSIGNEE:
