@@ -7,7 +7,7 @@ spring:
     name: asset-ms
   data:
     mongodb:
-      auto-index-creation : true
+      auto-index-creation: true
       uri: mongodb://${ASSET_MONGO_USERNAME}:${ASSET_MONGO_PASSWORD}@${ASSET_MONGO_HOST}:${ASSET_MONGO_PORT}/${ASSET_MONGO_DB}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
 
 feign-clients:
@@ -31,4 +31,9 @@ springdoc:
     port: ${REDIS_PORT}
     cache:
       type: redis
-      cache-names : AssigneeCache
+      cache-names: AssigneeCache
+
+MS:
+  ASSIGNEE:
+    URL: http://${ASSIGNEE_PORT}:${ASSIGNEE_HOST}
+    PATH: assignee

@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,16 @@ public class MyClientService {
   private final StringRedisTemplate redisTemplate;
   private final ObjectMapper objectMapper;
 
+  @Value("${MS.ASSIGNEE.URL}")
+  private String URL;
+
+  @Value("${MS.ASSIGNEE.PATH}")
+  private String PATH;
+
   @Autowired
   public MyClientService(Builder webClientBuilder, AssigneeResponseMapper assigneeResponseMapper,
       StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
-    this.webClient = webClientBuilder.baseUrl("http://127.0.0.1:8081/assignee").build();
-    //TODO: DEJAR LA CONEXION EN TERMINOS DE VARIABLES DE ENTORNO
+    this.webClient = webClientBuilder.baseUrl(URL + "/" + PATH).build();
     this.assigneeResponseMapper = assigneeResponseMapper;
     this.redisTemplate = redisTemplate;
     this.objectMapper = objectMapper;
@@ -43,6 +49,7 @@ public class MyClientService {
     }
 
     return webClient.get()
+        //TODO: ENVIRONMENT VARIABLES FOR THIS PATH
         .uri(uriBuilder -> uriBuilder.path("/id")
             .queryParam("assigneeId", assigneeId)
             .build())
@@ -53,7 +60,8 @@ public class MyClientService {
               try {
                 if (Objects.nonNull(eventResult)) {
                   // guardar el redis la respuesta del microservicio para futuras consultas.
-                  valueOps.set(assigneeId, objectMapper.writeValueAsString(eventResult), Duration.ofMillis(10000));
+                  valueOps.set(assigneeId, objectMapper.writeValueAsString(eventResult),
+                      Duration.ofMillis(10000));
                   return assigneeResponseMapper.toDto(eventResult);
                 }
 
