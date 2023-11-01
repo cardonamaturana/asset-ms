@@ -12,7 +12,7 @@ services:
       - backend-asset
     expose:
       - ${REDIS_PORT}
-
+    restart: always
 volumes:
   redis-data:
 

@@ -27,6 +27,7 @@ services:
       - /mongo-data-asset-ms:/data/db
     networks:
       - backend-asset
+      - backend-assignee
     expose:
       - ${ASSET_MONGO_PORT}
     restart: always
@@ -36,4 +37,8 @@ services:
 networks:
   backend-asset:
     name: backend-asset
+    driver: bridge
+  backend-assignee:
+    external: true
+    name: backend-assignee
     driver: bridge
