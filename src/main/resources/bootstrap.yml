@@ -1,10 +1,8 @@
-redis:
-  host: redis
-  port: ${REDIS_PORT}
-  cache:
-    type: redis
-    cache-names: AssigneeCache
-
+spring:
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+---
 server:
   port: 8080
 spring:
@@ -36,5 +34,5 @@ springdoc:
 
 MS:
   ASSIGNEE:
-    URL: http://${ASSIGNEE_PORT}:${ASSIGNEE_HOST}
+    URL: http://${ASSIGNEE_HOST}:${ASSIGNEE_PORT}
     PATH: assignee

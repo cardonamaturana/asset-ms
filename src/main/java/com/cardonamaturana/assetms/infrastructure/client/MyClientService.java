@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Duration;
 import java.util.Objects;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -17,23 +16,22 @@ import org.springframework.web.reactive.function.client.WebClient.Builder;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 public class MyClientService {
 
+  private final String URL;
+  private final String PATH;
   private final WebClient webClient;
   private final AssigneeResponseMapper assigneeResponseMapper;
   private final StringRedisTemplate redisTemplate;
   private final ObjectMapper objectMapper;
 
-  @Value("${MS.ASSIGNEE.URL}")
-  private String URL;
-
-  @Value("${MS.ASSIGNEE.PATH}")
-  private String PATH;
-
   @Autowired
-  public MyClientService(Builder webClientBuilder, AssigneeResponseMapper assigneeResponseMapper,
+  public MyClientService(@Value("${MS.ASSIGNEE.URL}") String URL,
+      @Value("${MS.ASSIGNEE.PATH}") String PATH, Builder webClientBuilder,
+      AssigneeResponseMapper assigneeResponseMapper,
       StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
+    this.URL = URL;
+    this.PATH = PATH;
     this.webClient = webClientBuilder.baseUrl(URL + "/" + PATH).build();
     this.assigneeResponseMapper = assigneeResponseMapper;
     this.redisTemplate = redisTemplate;
